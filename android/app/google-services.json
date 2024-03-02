@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "641704751637",
+    "project_id": "cityeyehandyman",
+    "storage_bucket": "cityeyehandyman.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:641704751637:android:e0042a7e521fac7cde141c",
+        "android_client_info": {
+          "package_name": "com.sprinteye.cityeyehandyman"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF8wsJ6LMIhWnIv61_mATrA031kNKmHos"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

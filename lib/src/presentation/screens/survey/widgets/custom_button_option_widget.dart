@@ -1,0 +1,104 @@
+import 'package:city_eye/src/config/theme/color_schemes.dart';
+import 'package:city_eye/src/core/resources/image_paths.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+
+class CustomEventsButtonOptionWidget extends StatefulWidget {
+  final void Function() onTap;
+  final String buttonTitle;
+  final double? height;
+  late bool? isSelected;
+
+  CustomEventsButtonOptionWidget({
+    Key? key,
+    required this.onTap,
+    required this.buttonTitle,
+    this.height = 30,
+    this.isSelected = false,
+  }) : super(key: key);
+
+  @override
+  State<CustomEventsButtonOptionWidget> createState() =>
+      _CustomEventsButtonOptionWidgetState();
+}
+
+class _CustomEventsButtonOptionWidgetState
+    extends State<CustomEventsButtonOptionWidget> {
+  Color _borderWithTitleColor = ColorSchemes.gray;
+
+  @override
+  void didUpdateWidget(covariant CustomEventsButtonOptionWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    widget.isSelected == true
+        ? _borderWithTitleColor = ColorSchemes.primary
+        : _borderWithTitleColor = ColorSchemes.gray;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        widget.onTap();
+        _checkButtonIsSelected();
+      },
+      child: SizedBox(
+        height: widget.height,
+        child: Stack(
+          alignment: Alignment.centerRight,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(right: 8),
+              decoration: BoxDecoration(
+                  border: Border.all(
+                      color: widget.isSelected == true
+                          ? _borderWithTitleColor = ColorSchemes.primary
+                          : _borderWithTitleColor = ColorSchemes.gray),
+                  color: ColorSchemes.white,
+                  borderRadius: BorderRadius.circular(8)),
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Text(
+                    widget.buttonTitle,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: widget.isSelected == true
+                            ? ColorSchemes.primary
+                            : ColorSchemes.gray,
+                        letterSpacing: -0.13),
+                  ),
+                ),
+              ),
+            ),
+            Visibility(
+              visible: widget.isSelected!,
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Container(
+                  height: 20,
+                  width: 20,
+                  decoration: BoxDecoration(
+                    color: ColorSchemes.primary,
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                  child: SvgPicture.asset(
+                    ImagePaths.icApprove,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _checkButtonIsSelected() {
+    setState(() {
+      if (widget.isSelected!) {
+        _borderWithTitleColor = ColorSchemes.primary;
+      } else {
+        _borderWithTitleColor = ColorSchemes.gray;
+      }
+    });
+  }
+}
